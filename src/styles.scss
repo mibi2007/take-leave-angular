@@ -1,1 +1,130 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* You can add global styles to this file, and also import other style files */
+app-root,
+body {
+  @apply w-full text-white;
+  font-family: 'Montserrat', sans-serif;
+}
+h1 {
+  @apply text-white;
+  font-size: 2.25rem;
+}
+h2 {
+  font-size: 2rem;
+}
+h3 {
+  font-size: 1.75rem;
+}
+h4 {
+  font-size: 1.5rem;
+}
+h5 {
+  font-size: 1.375rem;
+}
+h6 {
+  font-size: 1.125rem;
+}
+.h7 {
+  font-size: 1rem;
+}
+.h8 {
+  font-size: 0.875rem;
+  font-weight: 800;
+}
+h1,
+h2,
+h3,
+h4,
+h6,
+.h7,
+.h8 {
+  @apply m-0 font-bold;
+  font-weight: 700;
+  line-height: 150%;
+}
+.col {
+  @apply flex flex-col;
+}
+input {
+  // type text and date
+
+  &[type='text'],
+  &[type='date'],
+  &[type='time'],
+  &[type='number'] {
+    @apply rounded-lg w-full text-black;
+  }
+  &[type='radio'] {
+    @apply w-4 h-4 text-red-500 bg-gray-700 focus:ring-red-400 focus:ring-2 ring-offset-red-500 border-gray-600;
+  }
+}
+select,
+textarea {
+  @apply rounded-lg w-full text-black;
+}
+label {
+  @apply ml-2 text-sm font-medium;
+}
+.btn,
+.btn-rounded {
+  @apply rounded-md h-10 px-5 flex items-center justify-center cursor-pointer border font-bold whitespace-nowrap min-w-[115px];
+}
+.btn {
+  @apply bg-red-500 text-white border-red-500;
+  &:active {
+    @apply text-red-700;
+  }
+  &:hover {
+    @apply shadow-1;
+  }
+  &:disabled {
+    @apply bg-gray-200 text-gray-400 border-gray-200;
+  }
+}
+.btn-rounded {
+  @apply bg-white text-red-500 border-gray-300;
+  &:active {
+    @apply border-red-500 text-red-500;
+  }
+  &:hover {
+    @apply shadow-1;
+  }
+  &:disabled {
+    @apply border-gray-300 text-gray-300 bg-white;
+    &:hover {
+      @apply shadow-none cursor-not-allowed;
+    }
+  }
+}
+.error {
+  @apply px-3 mt-1 text-red-900;
+}
+table:not([role='presentation']) {
+  @apply table border-separate box-border border-spacing-3 border-white border w-full;
+
+  tr > td:first-child {
+    @apply font-bold;
+    &::after {
+      content: ':';
+    }
+  }
+  @media screen and (max-width: 768px) {
+    @apply flex flex-col gap-4 p-4;
+    tr {
+      @apply flex flex-col;
+      & > td {
+        display: block;
+      }
+    }
+  }
+}
+
+.footer-image {
+  background-image: url(/assets/images.jpg);
+  min-height: 200px;
+  background-size: cover;
+  background-position: center center;
+}

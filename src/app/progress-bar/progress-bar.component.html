@@ -1,0 +1,18 @@
+<div class="w-full relative h-4">
+  <div
+    class="flex absolute w-[calc(100%_-_10px)] top-[7px] left-2 h-[3px] bg-light-grey"
+  >
+    <div
+      *ngFor="let i of spaceArr"
+      class="h-[3px] flex-1"
+      [ngClass]="{ 'bg-red-500': i === 1, 'bg-light-grey': i === 0 }"
+    ></div>
+  </div>
+  <div class="absolute w-full h-4 flex justify-between">
+    <div
+      *ngFor="let i of dotArr"
+      class="w-4 h-4 rounded-lg"
+      [ngClass]="{ 'bg-red-500': i === 1, 'bg-light-grey': i === 0 }"
+    ></div>
+  </div>
+</div>

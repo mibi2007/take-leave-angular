@@ -1,0 +1,171 @@
+<div
+  class="w-full min-h-screen overflow-auto col items-center justify-start bg-gray-900"
+>
+  <div class="flex w-full bg-white justify-center p-6">
+    <img src="/assets/logo.png" alt="" />
+  </div>
+  <div
+    *ngIf="this.form.type != ''"
+    class="col p-6 w-full md:max-w-[600px] gap-6"
+  >
+    <h1 class="w-full text-center">Duyệt Đơn {{ form.type }}</h1>
+    <div *ngIf="form.type == 'Nghỉ phép'" class="">
+      <table>
+        <tr>
+          <td>Email</td>
+          <td>{{ form.email }}</td>
+        </tr>
+        <tr>
+          <td>Tên</td>
+          <td>{{ form.name }}</td>
+        </tr>
+        <tr>
+          <td>Chức danh</td>
+          <td>{{ form.title }}</td>
+        </tr>
+        <tr>
+          <td>Đơn vị</td>
+          <td>{{ form.unit.id }}</td>
+        </tr>
+        <tr>
+          <td>Mong muốn</td>
+          <td>{{ form.type }}</td>
+        </tr>
+        <tr>
+          <td>Từ ngày</td>
+          <td>{{ form.fromDate }}</td>
+        </tr>
+        <tr>
+          <td>Đến ngày</td>
+          <td>{{ form.toDate }}</td>
+        </tr>
+        <tr>
+          <td>Theo chế độ</td>
+          <td>{{ form.mode }}</td>
+        </tr>
+        <tr>
+          <td>Số ngày đề nghị</td>
+          <td>{{ form.days }}</td>
+        </tr>
+        <tr style="vertical-align: top">
+          <td style="white-space: nowrap">Lý do</td>
+          <td>{{ form.reason }}</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="form.type == 'Điều chỉnh chấm công'" class="">
+      <table>
+        <tr>
+          <td>Email</td>
+          <td>{{ form.email }}</td>
+        </tr>
+        <tr>
+          <td>Tên</td>
+          <td>{{ form.name }}</td>
+        </tr>
+        <tr>
+          <td>Chức danh</td>
+          <td>{{ form.title }}</td>
+        </tr>
+        <tr>
+          <td>Đơn vị</td>
+          <td>{{ form.unit.id }}</td>
+        </tr>
+        <tr>
+          <td>Mong muốn</td>
+          <td>{{ form.type }}</td>
+        </tr>
+        <tr>
+          <td>Giờ vào</td>
+          <td>{{ form.fromTime }}</td>
+        </tr>
+        <tr>
+          <td>Giờ ra</td>
+          <td>{{ form.toTime }}</td>
+        </tr>
+        <tr>
+          <td>Ngày cần điều chỉnh</td>
+          <td>{{ form.onDate }}</td>
+        </tr>
+        <tr style="vertical-align: top">
+          <td style="white-space: nowrap">Lý do</td>
+          <td>{{ form.reason }}</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="form.type == 'Báo công tác'" class="">
+      <table>
+        <tr>
+          <td>Email</td>
+          <td>{{ form.email }}</td>
+        </tr>
+        <tr>
+          <td>Tên</td>
+          <td>{{ form.name }}</td>
+        </tr>
+        <tr>
+          <td>Chức danh</td>
+          <td>{{ form.title }}</td>
+        </tr>
+        <tr>
+          <td>Đơn vị</td>
+          <td>{{ form.unit.id }}</td>
+        </tr>
+        <tr>
+          <td>Mong muốn</td>
+          <td>{{ form.type }}</td>
+        </tr>
+        <tr>
+          <td>Thời gian bắt đầu</td>
+          <td>{{ form.fromTime }}</td>
+        </tr>
+        <tr>
+          <td>Ngày bắt đầu công tác</td>
+          <td>{{ form.fromDate }}</td>
+        </tr>
+        <tr>
+          <td>Thời gian kết thúc</td>
+          <td>{{ form.toTime }}</td>
+        </tr>
+        <tr>
+          <td>Ngày kết thúc công tác</td>
+          <td>{{ form.toDate }}</td>
+        </tr>
+        <tr style="vertical-align: top">
+          <td style="white-space: nowrap">Nơi công tác</td>
+          <td>{{ form.reason }}</td>
+        </tr>
+      </table>
+    </div>
+    <div *ngIf="step == 0" class="w-full flex flex-col justify-center gap-8">
+      <textarea
+        [(ngModel)]="rejectReason"
+        cols="10"
+        rows="3"
+        class="flex-1"
+        placeholder="Lý do từ chối (nếu có)"
+      ></textarea>
+      <div class="flex justify-center gap-8">
+        <button (click)="tuChoi()" class="btn-rounded" [disabled]="loading">
+          {{ loading ? loadingText : 'Từ chối' }}
+        </button>
+        <button (click)="duyet()" class="btn" [disabled]="loading">
+          {{ loading ? loadingText : 'Duyệt' }}
+        </button>
+      </div>
+    </div>
+    <h2 *ngIf="step == 1" class="text-center text-red-500">
+      Đã đồng ý duyệt {{ form.type }}
+    </h2>
+    <h2 *ngIf="step == 2" class="text-center text-red-500">
+      Đã từ chối duyệt {{ form.type }}
+    </h2>
+    <h2 *ngIf="step == 3" class="w-full text-center text-red-500">
+      Có lỗi, vui lòng kiểm tra lại hệ thống!
+    </h2>
+  </div>
+  <div *ngIf="this.form.type == ''" class="w-full text-center">
+    <h2>{{ loadingText }}</h2>
+  </div>
+  <div class="flex w-full bg-white justify-center p-6 footer-image mt-24"></div>
+</div>
