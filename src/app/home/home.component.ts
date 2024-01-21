@@ -2,15 +2,21 @@ import { CommonModule, formatDate } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, OnInit, Pipe, PipeTransform, inject } from '@angular/core';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
-import { FormBuilder, FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { DomSanitizer } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import pick from 'lodash-es/pick';
 import { ProgressBarComponent } from '../progress-bar/progress-bar.component';
 
-@Pipe({ standalone: true, name: 'safeHtml', })
+@Pipe({ standalone: true, name: 'safeHtml' })
 export class SafeHtmlPipe implements PipeTransform {
-  constructor(private sanitized: DomSanitizer) { }
+  constructor(private sanitized: DomSanitizer) {}
   transform(value: any) {
     return this.sanitized.bypassSecurityTrustHtml(value);
   }
@@ -21,14 +27,19 @@ export class SafeHtmlPipe implements PipeTransform {
 // })
 // class FooModule {}
 
-
 @Component({
   standalone: true,
-  imports: [CommonModule, RouterModule, ProgressBarComponent, ReactiveFormsModule, HttpClientModule, SafeHtmlPipe],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ProgressBarComponent,
+    ReactiveFormsModule,
+    HttpClientModule,
+    SafeHtmlPipe,
+  ],
   selector: 'app-root',
   templateUrl: './home.component.html',
 })
-
 export class HomeComponent implements OnInit {
   fb = inject(FormBuilder);
   firestore = inject(Firestore);
@@ -36,39 +47,22 @@ export class HomeComponent implements OnInit {
 
   form1!: FormGroup;
   form2!: FormGroup;
+  formBHXH!: FormGroup;
   form3!: FormGroup;
   form4!: FormGroup;
   form5!: FormGroup;
-  emailType: FormControl = new FormControl('personal', [
-    Validators.required,
-  ]);
-  name: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  title: FormControl = new FormControl('Nhân viên/KTV', [
-    Validators.required,
-  ]);
-  unit: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  type: FormControl = new FormControl('Nghỉ phép', [
-    Validators.required,
-  ]);
-  mode: FormControl = new FormControl('Phép năm', [
-    Validators.required,
-  ]);
-  reason2: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  reason3: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  reason4: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  days: FormControl = new FormControl(0.5, [
-    Validators.required,
-  ]);
+  emailType: FormControl = new FormControl('personal', [Validators.required]);
+  name: FormControl = new FormControl('', [Validators.required]);
+  title: FormControl = new FormControl('Nhân viên/KTV', [Validators.required]);
+  unit: FormControl = new FormControl('', [Validators.required]);
+  type: FormControl = new FormControl('Nghỉ phép', [Validators.required]);
+  mode: FormControl = new FormControl('Phép năm', [Validators.required]);
+  mode2: FormControl = new FormControl('Phép năm', [Validators.required]);
+  reason2: FormControl = new FormControl('', [Validators.required]);
+  reasonBHXH: FormControl = new FormControl('', [Validators.required]);
+  reason3: FormControl = new FormControl('', [Validators.required]);
+  reason4: FormControl = new FormControl('', [Validators.required]);
+  days: FormControl = new FormControl(0.5, [Validators.required]);
   email: FormControl = new FormControl('', [
     Validators.required,
     Validators.email,
@@ -77,33 +71,38 @@ export class HomeComponent implements OnInit {
     Validators.required,
     Validators.email,
   ]);
-  fromDate2: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), [
-    Validators.required,
-  ]);
-  fromDate4: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), [
-    Validators.required,
-  ]);
-  toDate2: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), [
-    Validators.required,
-  ]);
-  toDate4: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), [
-    Validators.required,
-  ]);
-  fromTime3: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  fromTime4: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  toTime3: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  toTime4: FormControl = new FormControl('', [
-    Validators.required,
-  ]);
-  onDate: FormControl = new FormControl(formatDate(new Date(), 'yyyy-MM-dd', 'en'), [
-    Validators.required,
-  ]);
+  fromDate2: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
+  fromDateBHXH: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
+  fromDate4: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
+  toDate2: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
+  toDateBHXH: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
+  toDate4: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
+  fromTime3: FormControl = new FormControl('', [Validators.required]);
+  fromTime4: FormControl = new FormControl('', [Validators.required]);
+  toTime3: FormControl = new FormControl('', [Validators.required]);
+  toTime4: FormControl = new FormControl('', [Validators.required]);
+  onDate: FormControl = new FormControl(
+    formatDate(new Date(), 'yyyy-MM-dd', 'en'),
+    [Validators.required]
+  );
   // changeReason: FormControl = new FormControl('', [
   //   Validators.required,
   // ]);
@@ -150,6 +149,12 @@ export class HomeComponent implements OnInit {
     this.form2.addControl('mode', this.mode);
     this.form2.addControl('reason', this.reason2);
 
+    this.formBHXH = this.fb.group({});
+    this.formBHXH.addControl('fromDate', this.fromDateBHXH);
+    this.formBHXH.addControl('toDate', this.toDateBHXH);
+    this.formBHXH.addControl('mode', this.mode);
+    this.formBHXH.addControl('reason', this.reasonBHXH);
+
     this.form3 = this.fb.group({});
     this.form3.addControl('fromTime', this.fromTime3);
     this.form3.addControl('toTime', this.toTime3);
@@ -175,17 +180,18 @@ export class HomeComponent implements OnInit {
       console.log(this.units);
     });
 
-    collectionData(collection(this.firestore, 'email_groups'), { idField: 'value' }).subscribe((data) => {
+    collectionData(collection(this.firestore, 'email_groups'), {
+      idField: 'value',
+    }).subscribe((data) => {
       console.log(data);
-      this.emailGroups = data.map((group) => group['value'])
+      this.emailGroups = data.map((group) => group['value']);
     });
   }
 
   submitForm1() {
     if (this.form1.invalid) {
       return;
-    }
-    else {
+    } else {
       this.step++;
       // setTimeout(() => {
       //   this.form2.updateValueAndValidity();
@@ -200,18 +206,21 @@ export class HomeComponent implements OnInit {
     }
     if (this.form2.invalid) {
       return;
+    } else {
+      this.step++;
     }
-    else {
-      // await this.http.post('https://us-central1-leave-request-9f3a3.cloudfunctions.net/sendEmail', {
-      // const params = { ...this.form1.value, ...this.form2.value };
-      // this.http.post('http://127.0.0.1:5001/xin-nghi-phep/us-central1/nghiPhep', params).subscribe({
-      //   next: (data: any) => {
-      //     console.log(data);
+  }
 
-      //     this.data = data.data;
-      //     this.step++;
-      //   }
-      // });
+  async submitFormBHXH() {
+    if (
+      Date.parse(this.fromDateBHXH.value) > Date.parse(this.toDateBHXH.value)
+    ) {
+      this.isDateError = true;
+      return;
+    }
+    if (this.formBHXH.invalid) {
+      return;
+    } else {
       this.step++;
     }
   }
@@ -233,8 +242,7 @@ export class HomeComponent implements OnInit {
     // check if fromTime is equal to toTime
     if (this.form3.invalid) {
       return;
-    }
-    else {
+    } else {
       // const params = {
       //   email: this.email.value,
       //   name: this.name.value,
@@ -255,20 +263,23 @@ export class HomeComponent implements OnInit {
   submitForm4() {
     // get minutes from fromTime value
     const fromTime = this.fromTime4.value.split(':');
-    const fromTimeSeconds = Number(fromTime[0]) * 3600 + Number(fromTime[1]) * 60;
+    const fromTimeSeconds =
+      Number(fromTime[0]) * 3600 + Number(fromTime[1]) * 60;
     // get minutes from toTime value
     const toTime = this.toTime4.value.split(':');
     const toTimeSeconds = Number(toTime[0]) * 3600 + Number(toTime[1]) * 60;
     // check if fromTime is greater than toTime
-    if (Date.parse(this.fromDate4.value) + fromTimeSeconds > Date.parse(this.toDate4.value) + toTimeSeconds) {
+    if (
+      Date.parse(this.fromDate4.value) + fromTimeSeconds >
+      Date.parse(this.toDate4.value) + toTimeSeconds
+    ) {
       this.isMissionTimeError = true;
       return;
     }
     // check if fromTime is equal to toTime
     if (this.form4.invalid) {
       return;
-    }
-    else {
+    } else {
       this.step++;
     }
   }
@@ -277,25 +288,32 @@ export class HomeComponent implements OnInit {
     // check if fromTime is equal to toTime
     if (this.form5.invalid) {
       return;
-    }
-    else {
+    } else {
       console.log('submit');
       this.loading = true;
-      const params = { ...this.form1.value, ...this.type.value == 'Nghỉ phép' ? this.form2.value : {}, ...this.type.value == 'Điều chỉnh chấm công' ? this.form3.value : {}, ...this.type.value == 'Báo công tác' ? this.form4.value : {}, ...this.form5.value };
-      this.http.post(
-        'https://us-central1-xin-nghi-phep.cloudfunctions.net/xinNghiPhep',
-        // 'http://127.0.0.1:5001/xin-nghi-phep/us-central1/xinNghiPhep',
-        params,
-      ).subscribe({
-        next: (data: any) => {
-          this.data = data.data;
-          this.step++;
-          this.loading = false;
-        }
-      });
+      const params = {
+        ...this.form1.value,
+        ...(this.type.value == 'Nghỉ phép' ? this.form2.value : {}),
+        ...(this.type.value == 'Nghỉ BHXH' ? this.formBHXH.value : {}),
+        ...(this.type.value == 'Điều chỉnh chấm công' ? this.form3.value : {}),
+        ...(this.type.value == 'Báo công tác' ? this.form4.value : {}),
+        ...this.form5.value,
+      };
+      this.http
+        .post(
+          'https://us-central1-xin-nghi-phep.cloudfunctions.net/xinNghiPhep',
+          // 'http://127.0.0.1:5001/xin-nghi-phep/us-central1/xinNghiPhep',
+          params
+        )
+        .subscribe({
+          next: (data: any) => {
+            this.data = data.data;
+            this.step++;
+            this.loading = false;
+          },
+        });
     }
   }
-
 }
 
 class Unit {

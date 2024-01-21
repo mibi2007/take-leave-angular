@@ -9,7 +9,7 @@
     class="col p-6 w-full md:max-w-[600px] gap-6"
   >
     <h1 class="w-full text-center">Duyệt Đơn {{ form.type }}</h1>
-    <div *ngIf="form.type == 'Nghỉ phép'" class="">
+    <div *ngIf="form.type == 'Nghỉ phép' || form.type == 'Nghỉ BHXH'" class="">
       <table>
         <tr>
           <td>Email</td>

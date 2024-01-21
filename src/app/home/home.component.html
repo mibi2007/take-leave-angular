@@ -104,6 +104,7 @@
         <select formControlName="type">
           <option value="" disabled>Chọn</option>
           <option value="Nghỉ phép">Nghỉ phép</option>
+          <option value="Nghỉ BHXH">Nghỉ BHXH</option>
           <option value="Điều chỉnh chấm công">Điều chỉnh chấm công</option>
           <option value="Báo công tác">Báo công tác</option>
         </select>
@@ -191,6 +192,61 @@
             [disabled]="form2.invalid"
             class="btn"
             (click)="submitForm2()"
+          >
+            Tiếp
+          </button>
+        </div>
+      </form>
+      <form
+        *ngIf="form1.value.type == 'Nghỉ BHXH'"
+        class="col gap-5 p-4"
+        [formGroup]="formBHXH"
+        autocomplete="off"
+      >
+        <div class="flex justify-around gap-4">
+          <div class="col">
+            <h5>Từ ngày *</h5>
+            <input type="date" formControlName="fromDate" />
+          </div>
+          <div class="col">
+            <h5>Đến ngày *</h5>
+            <input type="date" formControlName="toDate" />
+          </div>
+        </div>
+        <div class="col gap-4">
+          <h5>Theo chế độ *</h5>
+          <div class="flex items-center">
+            <input
+              id="mode-0"
+              type="radio"
+              value="Nghỉ ốm"
+              formControlName="mode"
+              name="mode"
+            />
+            <label for="mode-0">Nghỉ ốm</label>
+          </div>
+          <div class="flex items-center">
+            <input
+              id="mode-1"
+              type="radio"
+              value="Nghỉ thai sản"
+              formControlName="mode"
+              name="mode"
+            />
+            <label for="mode-1">Nghỉ thai sản</label>
+          </div>
+        </div>
+        <div class="col gap-4">
+          <h5>Lý do xin nghỉ *</h5>
+          <textarea cols="30" rows="4" formControlName="reason"></textarea>
+        </div>
+        <div class="error" *ngIf="isDateError">Ngày nghỉ chưa đúng</div>
+        <div class="flex w-full mt-4 justify-between">
+          <button class="btn-rounded" (click)="step = 0">Quay lại</button>
+          <button
+            [disabled]="formBHXH.invalid"
+            class="btn"
+            (click)="submitFormBHXH()"
           >
             Tiếp
           </button>
